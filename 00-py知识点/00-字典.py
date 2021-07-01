@@ -1,6 +1,4 @@
 dict1 = {'joe': 1, 'mary': 8}
-n = 0
-b = False
 
 # 返回字典元素个数
 print(len(dict1))
@@ -12,7 +10,11 @@ print(dict2)
 dict3 = dict1.clear()
 print(dict3)
 
-# 返回 “键”对应的 “值”，
+# 删除字典
+# del dict3
+
+
+# 返回 “键”对应的 “值”
 # 若“键”不存在 ， 就返回参数中的“值”
 n = dict2.get('joe', 100)
 print(n)
@@ -24,7 +26,7 @@ b = 'joe' in dict2
 print(b)
 
 dict2.setdefault('joe', 100)
-dict2.setdefault('hehe', 101)
+dict2.setdefault('here', 101)
 
 print(dict2.keys())
 print(dict2.values())

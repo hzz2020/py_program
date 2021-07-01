@@ -25,23 +25,25 @@ def handle_client_action(ip_port, tcp_socket):
     tcp_socket.close()
 
 
-# 1、创建tcp服务端套接字
-tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-# 2、绑定端口号
-tcp_server_socket.bind(('', 9090))
-# 3、设置监听最大连接数
-tcp_server_socket.listen(5)
-# 设置端口号复用
-tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
+if __name__ == '__main__':
+    # 1、创建tcp服务端套接字
+    tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # 2、绑定端口号
+    tcp_server_socket.bind(('', 9090))
+    # 3、设置监听最大连接数
+    tcp_server_socket.listen(5)
+    # 设置端口号复用
+    tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
 
-while True:
-    print('服务端启动，监听客户端连接')
-    # 3、等待连接
-    tcp_client_socket, ip_port = tcp_server_socket.accept()
+    while True:
+        print('服务端启动，监听客户端连接')
+        # 3、等待连接
+        tcp_client_socket, ip_port = tcp_server_socket.accept()
 
-    sub_thread = threading.Thread(target=handle_client_action, args=(ip_port, tcp_client_socket))
-    sub_thread.setDaemon(True)
-    sub_thread.start()
+        sub_thread = threading.Thread(target=handle_client_action, args=(ip_port, tcp_client_socket))
+        sub_thread.setDaemon(True)
+        sub_thread.start()
 
-# 关闭服务端套接字 此行代码可注销
-tcp_server_socket.close()
+    # 关闭服务端套接字 此行代码可注销
+    tcp_server_socket.close()
+

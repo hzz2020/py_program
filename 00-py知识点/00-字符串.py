@@ -1,0 +1,1 @@
+mystr = "life is busy, "
